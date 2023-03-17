@@ -1,0 +1,31 @@
+<p>contact-reactive works!</p>
+<form (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+<label for="name">Name</label>
+<input type="text" id="name" name="name"  formControlName="name" required>
+<div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']"><h1>This field is invalid</h1></div>
+<div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['minlength']"><h1>Need to be more than {{contactForm.get('name')?.errors?.['minlength'].requiredLength}} characters</h1></div>
+<br>
+<label for="age">Age</label>
+<input type="checkbox" id="age" name="nage"  formControlName="age" required>
+<div *ngIf="contactForm.get('age')?.touched && contactForm.get('age')?.errors?.['required']"><h1>This field is invalid</h1></div>
+<br>
+<label for="departament">Departament</label>
+<select name="departament" id="departament" formControlName="departament" (change)="changed($event,contactForm.get('departament')?.value,contactForm.get('comments')?.value)">
+<option selected="selected">Open this select Menu</option>
+<option value="Marketing">Markenting</option>
+<option value="Sales">Sales</option>
+<option value="other">other</option>
+</select>
+<br>
+<label for="comments">Comentarios</label>
+<textarea name="comments" id="comments" formControlName="comments" (change)="changed($event,contactForm.get('departament')?.value,contactForm.get('comments')?.value)"></textarea>
+<div *ngIf="contactForm.get('comments')?.touched && contactForm.get('comments')?.errors?.['required']"><h1>This field is invalid</h1></div>
+<div *ngIf="contactForm.get('comments')?.touched && contactForm.get('comments')?.errors?.['minlength']"><h1>Need to be more than {{contactForm.get('comments')?.errors?.['minlength'].requiredLength}} characters</h1></div>
+<label for="other">other</label>
+<textarea name="other" id="other" ></textarea>
+<br><br>
+<app-quill></app-quill>
+<!-- <button type="submit" [disabled]="contactForm.invalid">Send</button> -->
+<button type="submit">Send</button>
+</form>
+<!-- <div *ngIf="contactForm.get('name')?.touched"><div ></div></div> -->
